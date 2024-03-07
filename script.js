@@ -59,42 +59,41 @@ document.getElementById('formularioPesquisa').addEventListener('submit', functio
 let deferredPrompt;
 
 window.addEventListener('beforeinstallprompt', (e) => {
+    // Previne o navegador de mostrar o prompt automaticamente
     e.preventDefault();
+    // Salva o evento para que possa ser disparado mais tarde
     deferredPrompt = e;
-
-    // Mostrar o botão apenas se o PWA não estiver instalado.
-    // Esta é uma aproximação, já que não podemos verificar diretamente se o PWA está instalado.
-    const btnInstalarApp = document.getElementById('btnInstalarApp');
-    if (btnInstalarApp) {
-        btnInstalarApp.style.display = 'block';
-    }
 });
 
-document.getElementById('btnInstalarApp')?.addEventListener('click', () => {
-    // Ocultar o botão quando o usuário decide instalar o PWA.
-    const btnInstalarApp = document.getElementById('btnInstalarApp');
-    btnInstalarApp.style.display = 'none';
+// Assume que o botão está sempre visível inicialmente via HTML ou CSS
 
-    // Mostrar o prompt de instalação.
-    deferredPrompt.prompt();
-    deferredPrompt.userChoice.then((choiceResult) => {
-        if (choiceResult.outcome === 'accepted') {
-            console.log('Usuário aceitou a instalação do app');
-        } else {
-            console.log('Usuário recusou a instalação do app');
-        }
-        deferredPrompt = null;
-    });
+// Adiciona um ouvinte de evento ao botão que inicia a instalação
+document.getElementById('btnInstalarApp').addEventListener('click', () => {
+    // Verifica se existe um evento de prompt adiado (deferredPrompt)
+    if (deferredPrompt) {
+        // Mostra o prompt de instalação
+        deferredPrompt.prompt();
+        
+        // Espera pela decisão do usuário
+        deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+                console.log('Usuário aceitou a instalação do app');
+            } else {
+                console.log('Usuário recusou a instalação do app');
+            }
+            // Após a interação com o prompt, não precisaremos mais do deferredPrompt
+            deferredPrompt = null;
+        });
+
+        // Independente da escolha, oculta o botão pois a ação de instalação já foi iniciada
+        document.getElementById('btnInstalarApp').style.display = 'none';
+    }
 });
 
 window.addEventListener('appinstalled', () => {
     console.log('A aplicação foi instalada.');
-
-    // Ocultar o botão após a instalação.
-    const btnInstalarApp = document.getElementById('btnInstalarApp');
-    if (btnInstalarApp) {
-        btnInstalarApp.style.display = 'none';
-    }
+    // Se desejar, pode também ocultar o botão aqui como redundância
+    document.getElementById('btnInstalarApp').style.display = 'none';
 });
 
 // -----------------------------------------------------------------------------------------------
