@@ -54,6 +54,54 @@ document.getElementById('formularioPesquisa').addEventListener('submit', functio
 });
 
 
+
+// CODIGO INSTALAÇÃO PERSONALIZADA -----------------------------------------------------------------
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+    // Previne o mini-infobar de aparecer em dispositivos móveis
+    e.preventDefault();
+    // Guarda o evento para que possa ser acionado mais tarde
+    deferredPrompt = e;
+    // Atualiza a interface para mostrar o botão de instalação, caso o app não esteja instalado
+    mostrarPromptInstalacao();
+});
+
+// Adiciona um listener para o evento appinstalled
+window.addEventListener('appinstalled', (evt) => {
+    // App foi instalado
+    console.log('Aplicativo foi instalado.');
+    // Oculta o botão de instalação pois o app já está instalado
+    var btnInstalarApp = document.getElementById('btnInstalarApp');
+    if (btnInstalarApp) {
+        btnInstalarApp.style.display = 'none';
+    }
+});
+
+function mostrarPromptInstalacao() {
+    // Supondo que você tenha um botão com ID 'btnInstalarApp' no seu HTML
+    var btnInstalarApp = document.getElementById('btnInstalarApp');
+    if (btnInstalarApp) {
+        btnInstalarApp.style.display = 'block';
+        btnInstalarApp.addEventListener('click', (e) => {
+            // Oculta o botão após ser clicado
+            btnInstalarApp.style.display = 'none';
+            // Mostra o prompt de instalação
+            deferredPrompt.prompt();
+            // Espera pela resposta do usuário
+            deferredPrompt.userChoice.then((choiceResult) => {
+                if (choiceResult.outcome === 'accepted') {
+                    console.log('Usuário aceitou a instalação do app');
+                } else {
+                    console.log('Usuário recusou a instalação do app');
+                }
+                deferredPrompt = null;
+            });
+        });
+    }
+}
+
+// -----------------------------------------------------------------------------------------------
+
 function verificarSenha() {
     var senha = prompt("Digite a senha para exportar:");
     if (senha == "senhaSecreta") {
