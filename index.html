@@ -9,7 +9,7 @@
 </head>
 <body>
 
-
+<button id="btnInstalarApp" style="display:none;">Instalar Aplicativo</button>
 
 <form id="formularioPesquisa">
 
@@ -26,9 +26,31 @@
 
     <label for="nome">Nome:</label>
     <input type="text" id="nome" name="nome" required>
+    
+    <h3>Avaliação de Governo</h3>
 
-    <label for="telefone">Telefone:</label>
-    <input type="tel" id="telefone" name="telefone" required>
+    <label for="problemaBairro">Qual o principal problema do seu bairro:</label>
+    <input type="text" id="problemaBairro" name="problemaBairro" required>
+
+    <label for="problemaCidade">Qual o maior problema da cidade na sua opnião:</label>
+    <input type="text" id="problemaCidade" name="problemaCidade" required>
+
+    <label for="avaliacaoGoverno">Você aprova ou desaprova o governo do prefeito Tiago Cervantes?:</label>
+    <select id="avaliacaoGoverno" name="avaliacaoGoverno" required>
+        <option value="Aprovo">Aprovo</option>
+        <option value="Desaprovo">Desaprovo</option>
+    </select>
+
+    <label for="notaGoverno">De que forma você avalia o governo Tiago Cervantes:</label>
+    <select id="notaGoverno" name="notaGoverno" required>
+        <option value="sem valor">Escolha Uma opção...</option>
+        <option value="Ótimo">Ótimo</option>
+        <option value="Bom">Bom</option>
+        <option value="Regular">Regular</option>
+        <option value="Ruim">Ruim</option>
+        <option value="Péssimo">Péssimo</option>
+        <option value="Não sei avaliar">Não sei avaliar</option>
+    </select>
 
     <label for="sexo">Sexo:</label>
     <select id="sexo" name="sexo" required>
@@ -93,30 +115,8 @@
     <label for="votoVereador">Ainda de forma esponânea, qual seria seu voto para vereador?</label>
     <input type="text" id="votoVereador" name="votoVereador" required>
 
-    <h3>Avaliação de Governo</h3>
-
-    <label for="problemaBairro">Qual o principal problema do seu bairro:</label>
-    <input type="text" id="problemaBairro" name="problemaBairro" required>
-
-    <label for="problemaCidade">Qual o maior problema da cidade na sua opnião:</label>
-    <input type="text" id="problemaCidade" name="problemaCidade" required>
-
-    <label for="avaliacaoGoverno">Você aprova ou desaprova o governo do prefeito Tiago Cervantes?:</label>
-    <select id="avaliacaoGoverno" name="avaliacaoGoverno" required>
-        <option value="Aprovo">Aprovo</option>
-        <option value="Desaprovo">Desaprovo</option>
-    </select>
-
-    <label for="notaGoverno">De que forma você avalia o governo Tiago Cervantes:</label>
-    <select id="notaGoverno" name="notaGoverno" required>
-        <option value="sem valor">Escolha Uma opção...</option>
-        <option value="Ótimo">Ótimo</option>
-        <option value="Bom">Bom</option>
-        <option value="Regular">Regular</option>
-        <option value="Ruim">Ruim</option>
-        <option value="Péssimo">Péssimo</option>
-        <option value="Não sei avaliar">Não sei avaliar</option>
-    </select>
+    <label for="telefone">Telefone:</label>
+    <input type="tel" id="telefone" name="telefone" required>
 
     <button type="submit">Enviar</button>
 </form>
